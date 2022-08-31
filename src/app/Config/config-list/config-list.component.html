@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <button (click)="Listcon()" class="btn btn-info">List</button>
+        <button (click)="Addcon()" class="btn btn-info" style="margin-left:
+            30px;">New</button>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des configs</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th>ID</th>
+                        <th>NOM ATTRIBUT</th>
+                        <th>TYPE ATTRIBUT</th>
+                        <th>OPTIONS</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let config of configs" class="text-center">
+                        <td>{{config.id}}</td>
+                        <td>{{config.attName}}</td>
+                        <td>{{config.attType}}</td>
+                        <td>{{config.options}}</td>
+                        <td>
+                            <button (click)="Editcon(config)" class="btn
+                                btn-warning" style="margin-right: 0.5cm;">Edit</button>
+                            <button (click)="Deletecon(config)" class="btn
+                                btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br> <br>
+    <div class="card-body">
+        <form action="">
+            <ul *ngFor="let config of configs" class=""
+                style="list-style-type:none">
+                <li>
+                    <div class="form-group">
+                        <label for="{{config.id}}">{{config.attName}} :</label>
+                        <div *ngIf="this.config.attType=='text' ||
+                            this.config.attType=='password' ||
+                            this.config.attType=='number' ||
+                            this.config.attType=='email' ||
+                            this.config.attType=='date' ||
+                            this.config.attType=='color' ||
+                            this.config.attType=='file'">
+                            <input type="{{config.attType}}"
+                                class="form-control" name="attNom"
+                                id="{{config.id}}"
+                                placeholder="{{config.attType}}">
+                        </div>
+                        <div *ngIf="this.config.attType=='radio'">
+                            <input type="radio" id="{{config.id}}">
+                            <label for="{{config.id}}">{{config.options}}</label><br>
+                        </div>
+                        <div *ngIf="this.config.attType=='checkbox'">
+                            <input type="checkbox" id="{{config.id}}">
+                            <label for="{{config.id}}">{{config.options}}</label><br>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center">
+                <button class="btn btn-danger" style="margin-top: 0.5cm;">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+    <div *ngFor="let c of test" [innerHTML]="bindComponent(c)"></div>
+</div>
+
