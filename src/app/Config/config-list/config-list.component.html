@@ -37,41 +37,30 @@
         </div>
     </div>
     <br> <br>
-    <div class="card-body">
-        <form action="">
-            <ul *ngFor="let config of configs" class=""
-                style="list-style-type:none">
-                <li>
-                    <div class="form-group">
-                        <label for="{{config.id}}">{{config.attName}} :</label>
-                        <div *ngIf="this.config.attType=='text' ||
-                            this.config.attType=='password' ||
-                            this.config.attType=='number' ||
-                            this.config.attType=='email' ||
-                            this.config.attType=='date' ||
-                            this.config.attType=='color' ||
-                            this.config.attType=='file'">
-                            <input type="{{config.attType}}"
-                                class="form-control" name="attNom"
-                                id="{{config.id}}"
-                                placeholder="{{config.attType}}">
-                        </div>
-                        <div *ngIf="this.config.attType=='radio'">
-                            <input type="radio" id="{{config.id}}">
-                            <label for="{{config.id}}">{{config.options}}</label><br>
-                        </div>
-                        <div *ngIf="this.config.attType=='checkbox'">
-                            <input type="checkbox" id="{{config.id}}">
-                            <label for="{{config.id}}">{{config.options}}</label><br>
-                        </div>
+    <div class="card">
+        <div class="card-header" style="text-align: center;">
+            <h3>Formulaire ajouté</h3>
+        </div>
+        <div class="card-body">
+            <form action="" class="container">
+                <div *ngFor="let config of configs">
+                    <label>{{config.attName}} :</label>
+                    <div [innerHTML]="bindComponent(config.attCode)"
+                        *ngIf="config.options.length<1">
                     </div>
-                </li>
-            </ul>
-            <div class="text-center">
-                <button class="btn btn-danger" style="margin-top: 0.5cm;">Enregistrer</button>
-            </div>
-        </form>
+                    <div *ngIf="config.options.length>0 ">
+                        <div *ngFor="let option of config.options">
+                            <span
+                                [innerHTML]="bindComponent(config.attCode)"></span>
+                            <label>{{option}}</label>
+                        </div>
+                    </div> <br>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-danger" style="margin-top:
+                        0.5cm;">Enregistrer</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div *ngFor="let c of test" [innerHTML]="bindComponent(c)"></div>
 </div>
-

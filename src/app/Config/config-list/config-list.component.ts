@@ -10,23 +10,25 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./config-list.component.css']
 })
 export class ConfigListComponent implements OnInit {
-  test =  ['<input>', '<button>hello</button>' , '<select><option>H1</option><option>H2</option></select>'];
-
- 
+  // test = ['<input>', '<button>hello</button>', '<select><option>H1</option><option>H2</option></select>'];
+  test!: any  
+  attCodes!: string
   configs!: Config[];
+  configOptions!: Config[];
+
   constructor(private service: ServiceService, private router: Router, private sanitized: DomSanitizer) { }
 
   bindComponent(c): any {
-   return  this.sanitized.bypassSecurityTrustHtml(c);
+    return this.sanitized.bypassSecurityTrustHtml(c);
   }
 
   ngOnInit(): void {
     this.service.getConfigs()
       .subscribe(data => {
-        this.configs = data;
-      })
-      
+        this.configs = data;})
+
   }
+
 
   Editcon(config: Config) {
     localStorage.setItem("id", config.id.toString());

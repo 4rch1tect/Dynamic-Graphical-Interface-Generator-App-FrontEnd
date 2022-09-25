@@ -29,6 +29,16 @@ export class ConfigAddComponent implements OnInit {
   Enregistrercon(modelConfig: Config) {
     console.log(modelConfig.options);
     console.log(modelConfig);
+    if (this.modelConfig.attType == "checkbox") {
+      modelConfig.attCode = '<input type="checkbox">';
+    }
+    else if (this.modelConfig.attType == "radio") {
+      modelConfig.attCode = `<input type="radio" name="${modelConfig.attName}">`;
+    }
+    else {
+      modelConfig.attCode = `<input type="${modelConfig.attType}">`;
+    }
+
     this.service.ajoutConfig(modelConfig)
       .subscribe(data => {
         alert("Config ajouté !");
@@ -37,7 +47,7 @@ export class ConfigAddComponent implements OnInit {
   }
 
   types = [{
-    id: 1, attType: 'text'
+    id: 1, attType: 'text',
   },
   {
     id: 2, attType: 'password'
@@ -67,6 +77,14 @@ export class ConfigAddComponent implements OnInit {
 
   selected() {
     console.log(this.modelConfig.attType);
+    switch (this.modelConfig.attType) {
+      case ('radio'):
+        console.log('this is a radio my russian friend');
+        break;
+      case ('checkbox'):
+        console.log('this is a checkbox my russian friend');
+        break;
+    }
   }
   addOption() {
     this.modelConfig.options = []
@@ -83,4 +101,8 @@ export class ConfigAddComponent implements OnInit {
     const index = this.form.controls.option?.value.findIndex((address) => address.id === uId);
     this.form.controls.option?.value.splice(index, 1);
   }
+}
+
+function elif() {
+  throw new Error('Function not implemented.');
 }
