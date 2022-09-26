@@ -16,7 +16,7 @@ export class ClientAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  //Enregistrer les donnees du client dans la base de donnees
   EnregistrerC(modelClient: Client) {
     this.service.ajoutClient(modelClient)
       .subscribe(data => {

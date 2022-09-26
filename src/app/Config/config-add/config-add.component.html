@@ -16,7 +16,7 @@
                     <select name="type" class="form-select form-select-lg mb-3"
                         id="attType"
                         aria-label=".form-select-lg example"
-                        [(ngModel)]="modelConfig.attType" (change)="selected()">
+                        [(ngModel)]="modelConfig.attType">
                         <option *ngFor="let type of types"
                             [value]="type.attType">{{type.attType}}</option>
                     </select>
@@ -24,7 +24,7 @@
                     <form [formGroup]="form">
                         <div class="form-group"
                             *ngIf="this.modelConfig.attType=='radio' ||
-                            this.modelConfig.attType=='checkbox'">
+                            this.modelConfig.attType=='checkbox' || this.modelConfig.attType=='select'">
                             <button (click)="addOption()" class="btn
                                 btn-warning">Add Option(s)</button> <br> <br>
                             <div formArrayName="option" *ngFor="let option of

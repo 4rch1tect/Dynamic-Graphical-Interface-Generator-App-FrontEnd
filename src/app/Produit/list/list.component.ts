@@ -19,12 +19,12 @@ export class ListComponent implements OnInit {
         this.produits = data;
       })
   }
-
+  //Redirection vers la page Modifier Produit By Id
   Edit(produit: Produit) {
     localStorage.setItem("id", produit.id.toString());
     this.router.navigate(["edit"]);
   }
-
+  //Supprimer Produit
   Delete(produit: Produit) {
     this.service.deleteProduit(produit)
       .subscribe(data => {
@@ -32,10 +32,11 @@ export class ListComponent implements OnInit {
         alert("Produit supprimé !");
       })
   }
-
+  //Redirection vers la page List Produit
   List(){
     this.router.navigate(["list"]);
   }
+  //Redirection vers la page Add Produits
   Add(){
     this.router.navigate(["add"]);
   }

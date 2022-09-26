@@ -19,12 +19,12 @@ export class ClientListComponent implements OnInit {
         this.clients = data;
       })
   }
-
+  //Redirection vers la page Modifier client By Id
   EditC(client: Client) {
     localStorage.setItem("id", client.id.toString());
     this.router.navigate(["clientEdit"]);
   }
-
+  //Supprimer Client
   DeleteC(client: Client) {
     this.service.deleteClient(client)
       .subscribe(data => {
@@ -32,9 +32,11 @@ export class ClientListComponent implements OnInit {
         alert("Client supprimé !");
       })
   }
+  //Redirection vers la page List Clients
   ListC(){
     this.router.navigate(["clientList"]);
   }
+  //Redirection vers la page Add Clients
   AddC(){
     this.router.navigate(["clientAdd"]);
   }

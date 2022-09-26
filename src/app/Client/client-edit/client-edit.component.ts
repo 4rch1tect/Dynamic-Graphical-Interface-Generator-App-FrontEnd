@@ -17,7 +17,7 @@ export class ClientEditComponent implements OnInit {
     this.EditC();
   }
 
-
+  //Recuperer les donnees du client dans le formulaire de modification By Id
   EditC(){
     let id=localStorage.getItem("id");
     this.service.getClientId(+id!)
@@ -25,6 +25,7 @@ export class ClientEditComponent implements OnInit {
       this.client=data;
     })
   }
+  //Enregistrer les modifications des donnees du client
   ActualiserC(client:Client){
     this.service.updateClient(client)
     .subscribe(data=>{

@@ -17,7 +17,7 @@
                         <select name="type" class="form-select form-select-lg
                             mb-3"
                             aria-label=".form-select-lg example"
-                            [(ngModel)]="modelConfig.attType" (change)="selected()">
+                            [(ngModel)]="modelConfig.attType">
                             <option *ngFor="let type of types"
                                 [value]="type.attType">{{type.attType}}</option>
                         </select>

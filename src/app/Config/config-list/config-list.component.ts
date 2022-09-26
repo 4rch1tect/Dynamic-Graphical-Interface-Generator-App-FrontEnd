@@ -10,8 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./config-list.component.css']
 })
 export class ConfigListComponent implements OnInit {
-  // test = ['<input>', '<button>hello</button>', '<select><option>H1</option><option>H2</option></select>'];
-  test!: any  
+
   attCodes!: string
   configs!: Config[];
   configOptions!: Config[];
@@ -28,13 +27,12 @@ export class ConfigListComponent implements OnInit {
         this.configs = data;})
 
   }
-
-
+  //Redirection vers la page Modifier config By Id
   Editcon(config: Config) {
     localStorage.setItem("id", config.id.toString());
     this.router.navigate(["configEdit"]);
   }
-
+  //Supprimer Config
   Deletecon(config: Config) {
     this.service.deleteConfig(config)
       .subscribe(data => {
@@ -42,9 +40,11 @@ export class ConfigListComponent implements OnInit {
         alert("Config supprimé !");
       })
   }
+    //Redirection vers la page List Configs
   Listcon() {
     this.router.navigate(["configList"]);
   }
+    //Redirection vers la page Add Configs
   Addcon() {
     this.router.navigate(["configAdd"]);
   }

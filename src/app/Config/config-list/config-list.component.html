@@ -48,13 +48,19 @@
                     <div [innerHTML]="bindComponent(config.attCode)"
                         *ngIf="config.options.length<1">
                     </div>
-                    <div *ngIf="config.options.length>0 ">
+                    <div *ngIf='config.options.length>0 &&
+                        config.attType!="select"'>
                         <div *ngFor="let option of config.options">
                             <span
                                 [innerHTML]="bindComponent(config.attCode)"></span>
                             <label>{{option}}</label>
                         </div>
-                    </div> <br>
+                    </div>
+                    <div *ngIf='config.attType == "select"'>
+                            <span
+                                [innerHTML]="bindComponent(config.attCode)"></span>
+                    </div>
+                    <br>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-danger" style="margin-top:

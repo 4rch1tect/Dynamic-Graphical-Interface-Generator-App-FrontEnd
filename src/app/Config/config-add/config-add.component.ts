@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/Service/service.service';
 import { Router } from '@angular/router';
 import { Config } from 'src/app/Model/Config';
@@ -10,7 +10,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./config-add.component.css']
 })
 export class ConfigAddComponent implements OnInit {
-
+ options :any
   modelConfig = new Config();
   form: any;
   status: string;
@@ -25,15 +25,20 @@ export class ConfigAddComponent implements OnInit {
   ngOnInit(): void {
     this.status = "hidden"
   }
-
+  //Enregistrer les donnees du client dans la base de donnees
+  //Selon le type du attType, un input sera cree de meme type que attType dans la liste des configs
   Enregistrercon(modelConfig: Config) {
-    console.log(modelConfig.options);
-    console.log(modelConfig);
     if (this.modelConfig.attType == "checkbox") {
       modelConfig.attCode = '<input type="checkbox">';
     }
     else if (this.modelConfig.attType == "radio") {
       modelConfig.attCode = `<input type="radio" name="${modelConfig.attName}">`;
+    }
+    else if (this.modelConfig.attType == "select") {
+      for(let i = 0; i<modelConfig.options.length;i++){
+        this.options += `<option>${modelConfig.options[i]}</option>`;
+      }
+      modelConfig.attCode = `<select name="${modelConfig.attName}">${this.options}</select>`;
     }
     else {
       modelConfig.attCode = `<input type="${modelConfig.attType}">`;
@@ -45,7 +50,7 @@ export class ConfigAddComponent implements OnInit {
         this.router.navigate(["configList"]);
       })
   }
-
+  //Types des inputs disponibles dans attType
   types = [{
     id: 1, attType: 'text',
   },
@@ -59,7 +64,7 @@ export class ConfigAddComponent implements OnInit {
     id: 4, attType: 'checkbox'
   },
   {
-    id: 5, attType: 'number'
+    id: 5, attType: 'select'
   },
   {
     id: 6, attType: 'email'
@@ -73,36 +78,25 @@ export class ConfigAddComponent implements OnInit {
   {
     id: 9, attType: 'file'
   },
+  {
+    id: 10, attType: 'number'
+  },
   ];
-
-  selected() {
-    console.log(this.modelConfig.attType);
-    switch (this.modelConfig.attType) {
-      case ('radio'):
-        console.log('this is a radio my russian friend');
-        break;
-      case ('checkbox'):
-        console.log('this is a checkbox my russian friend');
-        break;
-    }
-  }
+  //Saisir les options en cas de checkbox, radio ou select
   addOption() {
     this.modelConfig.options = []
     const option = this.form.controls.option as FormArray;
     option.push(this.fb.group({
       option: []
     }));
-    console.log(option);
   }
   trackByFn(index, item) {
     return index;
   }
+  //Supprimer une option lors de la saisie des options
   removeAddress(uId: number) {
     const index = this.form.controls.option?.value.findIndex((address) => address.id === uId);
     this.form.controls.option?.value.splice(index, 1);
   }
 }
 
-function elif() {
-  throw new Error('Function not implemented.');
-}

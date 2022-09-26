@@ -15,6 +15,7 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Enregistrer les donnees du produit dans la base de donnees
   Enregistrer(modelProduit: Produit) {
     this.service.ajoutProduit(modelProduit)
       .subscribe(data => {

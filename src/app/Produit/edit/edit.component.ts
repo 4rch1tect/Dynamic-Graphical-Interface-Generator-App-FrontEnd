@@ -16,6 +16,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.Edit();
   }
+  //Recuperer les donnees du produit dans le formulaire de modification By Id
   Edit(){
     let id=localStorage.getItem("id");
     this.service.getProduitId(+id!)
@@ -23,6 +24,7 @@ export class EditComponent implements OnInit {
       this.produit=data;
     })
   }
+  //Enregistrer les modifications des donnees du produit
   Actualiser(produit:Produit){
     this.service.updateProduit(produit)
     .subscribe(data=>{

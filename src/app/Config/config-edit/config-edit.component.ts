@@ -24,7 +24,7 @@ export class ConfigEditComponent implements OnInit {
     this.Editcon();
     this.status = "hidden"
   }
-
+  //Recuperer les donnees du config dans le formulaire de modification By Id
   Editcon() {
     let id = localStorage.getItem("id");
     this.service.getConfigId(+id!)
@@ -32,6 +32,7 @@ export class ConfigEditComponent implements OnInit {
         this.modelConfig = data;
       })
   }
+    //Enregistrer les modifications des donnees du config
   Actualisercon(config: Config) {
     this.service.updateConfig(config)
       .subscribe(data => {
@@ -40,7 +41,7 @@ export class ConfigEditComponent implements OnInit {
         this.router.navigate(["configList"]);
       })
   }
-  
+  //Types des inputs disponibles dans attType
   types = [{
     id: 1, attType: 'text'
   },
@@ -69,21 +70,19 @@ export class ConfigEditComponent implements OnInit {
     id: 9, attType: 'file'
   },
   ];
-
-  selected() {
-    console.log(this.modelConfig.attType);
-  }
+  //Saisir les options en cas de checkbox, radio ou select
   addOption() {
     this.modelConfig.options = []
     const option = this.form.controls.option as FormArray;
     option.push(this.fb.group({
       option: []
     }));
-    console.log(option);
   }
+    //fonction optionelle qui permet de personnalizer comment NgFor idientifie les elements de l'iteration
   trackByFn(index, item) {
     return index;
   }
+    //Supprimer une option lors de la saisie des options
   removeAddress(uId: number) {
     const index = this.form.controls.option?.value.findIndex((address) => address.id === uId);
     this.form.controls.option?.value.splice(index, 1);
